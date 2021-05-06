@@ -1,11 +1,10 @@
-<!-- This Code is licensed by Will-Myers.com -->
-function wmSliderBuild() {
+function apSliderBuild() {
     //Add Classes To Each Slide
-    $(wmSlider).each(function (index) {
+    $(apSlider).each(function (index) {
         this.autoSlider;
         this.intervalTime = this.sliderTime * 1000;
         let currentSliderObject = this;
-        let sliderIndex = wmSlider.indexOf(this);
+        let sliderIndex = apSlider.indexOf(this);
         sliderIndex++;
         //Create an array of each slide number
         let sliderArray = [];
@@ -21,7 +20,7 @@ function wmSliderBuild() {
                     console.log('static first');
                     $('.Site-inner--index main.Index > section.Index-page:nth-of-type(' + this + ')')
                         .addClass('slider-' + sliderIndex)
-                        .addClass('wm-slide')
+                        .addClass('ap-slide')
                         .attr('data-slide-num', slideIndex);
                     $('.slider-' + sliderIndex + '[data-slide-num="0"]')
                         .removeAttr('data-slide-num')
@@ -31,7 +30,7 @@ function wmSliderBuild() {
                     slideIndex++;
                     $('.Site-inner--index main.Index > section.Index-page:nth-of-type(' + this + ')')
                         .addClass('slider-' + sliderIndex)
-                        .addClass('wm-slide')
+                        .addClass('ap-slide')
                         .attr('data-slide-num', slideIndex);
                 }
             });
@@ -42,7 +41,7 @@ function wmSliderBuild() {
                 if (currentSliderObject.staticFirst) {
                     $('#siteWrapper > main article > section:nth-of-type(' + this + ')')
                         .addClass('slider-' + sliderIndex)
-                        .addClass('wm-slide')
+                        .addClass('ap-slide')
                         .attr('data-slide-num', slideIndex);
                     $('.slider-' + sliderIndex + '[data-slide-num="0"]')
                         .removeAttr('data-slide-num')
@@ -51,7 +50,7 @@ function wmSliderBuild() {
                     slideIndex++;
                     $('#siteWrapper > main article > section:nth-of-type(' + this + ')')
                         .addClass('slider-' + sliderIndex)
-                        .addClass('wm-slide')
+                        .addClass('ap-slide')
                         .attr('data-slide-num', slideIndex);
                 }
             });
@@ -59,15 +58,15 @@ function wmSliderBuild() {
     });
 
     //Wrap Each Slide Group Together
-    $(wmSlider).each(function (i) {
-        let sliderIndex = wmSlider.indexOf(this);
+    $(apSlider).each(function (i) {
+        let sliderIndex = apSlider.indexOf(this);
         sliderIndex++;
-        $('.slider-' + sliderIndex).wrapAll('<div id="slider-' + sliderIndex + '" class="wm-slider-container" data-slider-timer="' + this.intervalTime + '"></div>"');
+        $('.slider-' + sliderIndex).wrapAll('<div id="slider-' + sliderIndex + '" class="ap-slider-container" data-slider-timer="' + this.intervalTime + '"></div>"');
         this.element = $('#slider-' + sliderIndex);
         this.selector = '#slider-' + sliderIndex;
     });
 
-    $(wmSlider).each(function () {
+    $(apSlider).each(function () {
         let numOfSlides = $(this.element).find('[data-slide-num]').length;
         this.numOfSlides = numOfSlides;
     });
@@ -75,7 +74,7 @@ function wmSliderBuild() {
 
 //Build In Next & Previous Arrow Elements
 function buildNextPrev() {
-    $(wmSlider).each(function (i) {
+    $(apSlider).each(function (i) {
         let thisSliderId = $(this.element).attr('id');
         let sliderSelector = "#" + thisSliderId;
         let sliderObject = this;
@@ -133,7 +132,7 @@ function prevSlide(sliderSelector, sliderObject) {
 
 //initiate the first slides
 function initTheSlides() {
-    $('.wm-slider-container').each(function () {
+    $('.ap-slider-container').each(function () {
         let numOfSlides = $(this).find('[data-slide-num]').length;
         $(this).find('section[data-slide-num="1"]').attr('data-slide', 'current');
         $(this).find('.slider-dot:first-of-type').addClass('active-dot');
@@ -145,7 +144,7 @@ function initTheSlides() {
 //Build the Play / Pause Button Element
 function buildPlayPause() {
     /* Build Play/Pause icon */
-    $(wmSlider).each(function () {
+    $(apSlider).each(function () {
         let sliderSelector = '#' + $(this.element).attr('id');
         let sliderObject = this;
 
@@ -164,11 +163,11 @@ function buildPlayPause() {
         }
 
         if (this.autoSliderOn) {
-            $(sliderSelector + ' .play-pause-btn').addClass('wm-slider-playing');
+            $(sliderSelector + ' .play-pause-btn').addClass('ap-slider-playing');
             $(sliderSelector + ' .pause-btn').css('display', 'block');
             $(sliderSelector + ' .play-btn').css('display', 'none');
         } else {
-            $(sliderSelector + ' .play-pause-btn').addClass('wm-slider-paused');
+            $(sliderSelector + ' .play-pause-btn').addClass('ap-slider-paused');
             $(sliderSelector + ' .pause-btn').css('display', 'none');
             $(sliderSelector + ' .play-btn').css('display', 'block');
         }
@@ -177,7 +176,7 @@ function buildPlayPause() {
 
 //Build the Slider Dots
 function buildSliderDots() {
-    $(wmSlider).each(function () {
+    $(apSlider).each(function () {
         let sliderObject = this;
         if (this.sliderDots) {
             $(this.element).prepend('<div class="dots-container"></div>');
@@ -201,7 +200,7 @@ function buildSliderDots() {
 function makeCurrent(sliderId, nextSlide, sliderObject) {
     let sliderSelector = sliderId;
     $(sliderSelector + ' .active-dot').removeClass('active-dot');
-    $("#wm-slider-container section[data-slide='current']").removeAttr('data-slide', 'current');
+    $("#ap-slider-container section[data-slide='current']").removeAttr('data-slide', 'current');
     $(sliderSelector + ' .dot-' + nextSlide).addClass('active-dot');
 
     $(sliderSelector + ' section[data-slide="current"]').removeAttr('data-slide', 'current');
@@ -233,7 +232,7 @@ function styleNextPrevSlides(sliderId, currentSlide) {
 
 /*=========AutoSlider Stuff=============*/
 function initAutoSlider() {
-    $(wmSlider).each(function () {
+    $(apSlider).each(function () {
         let sliderObject = this;
         let sliderSelector = sliderObject.selector;
         if (sliderObject.autoSliderOn) {
@@ -248,8 +247,8 @@ function initAutoSlider() {
 }
 
 function togglePlayPause(sliderSelector) {
-    $(sliderSelector + ' .play-pause-btn').toggleClass('wm-slider-paused');
-    $(sliderSelector + ' .play-pause-btn').toggleClass('wm-slider-playing');
+    $(sliderSelector + ' .play-pause-btn').toggleClass('ap-slider-paused');
+    $(sliderSelector + ' .play-pause-btn').toggleClass('ap-slider-playing');
     $(sliderSelector + ' .play-btn').toggle();
     $(sliderSelector + ' .pause-btn').toggle();
 }
@@ -282,21 +281,21 @@ function stopSlider(sliderObject) {
 
 function isFirstSection(){
 
-  if ($('body:not(.tweak-transparent-header) .wm-slider-container:first-of-type').is(':first-child')){
+  if ($('body:not(.tweak-transparent-header) .ap-slider-container:first-of-type').is(':first-child')){
     adjustSliderPadding();
     window.addEventListener("resize", adjustSliderPadding);
   } 
 
   function adjustSliderPadding(){
-    let wmHeaderHeight = $('header#header').height() + "px";
-    $(':root').css('--wm-header-height', wmHeaderHeight);
-    $('.wm-slider-container:first-of-type').addClass('first-section');
+    let apHeaderHeight = $('header#header').height() + "px";
+    $(':root').css('--ap-header-height', apHeaderHeight);
+    $('.ap-slider-container:first-of-type').addClass('first-section');
   }
 }
 
 /*=========Start Stuff============*/
 $(function () {
-  wmSliderBuild();
+  apSliderBuild();
   buildNextPrev();
   buildPlayPause();
   buildSliderDots();
